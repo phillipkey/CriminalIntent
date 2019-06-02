@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,8 +52,16 @@ public class CrimeListFragment extends Fragment {
     }
 
     private class CrimeHolderPolice extends CrimeHolder implements View.OnClickListener {
+        Button mPoliceButton;
         public CrimeHolderPolice(LayoutInflater inflater, ViewGroup parent) {
             super(inflater, parent, R.layout.list_item_crime_police);
+            mPoliceButton = itemView.findViewById(R.id.police_button);
+            mPoliceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getActivity(), "The police are being notified", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
