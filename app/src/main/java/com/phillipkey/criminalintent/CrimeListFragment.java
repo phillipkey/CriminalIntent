@@ -41,17 +41,17 @@ public class CrimeListFragment extends Fragment {
         }
 
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private class GenericCrimeHolder extends CrimeHolder {
+    private class GenericCrimeHolder extends RecyclerView.ViewHolder {
         public GenericCrimeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater, parent, R.layout.list_item_crime);
         }
     }
 
-    private class CrimeHolderPolice extends CrimeHolder implements View.OnClickListener {
+    private class CrimeHolderPolice extends RecyclerView.ViewHolder implements View.OnClickListener {
         Button mPoliceButton;
         public CrimeHolderPolice(LayoutInflater inflater, ViewGroup parent) {
             super(inflater, parent, R.layout.list_item_crime_police);
@@ -62,6 +62,10 @@ public class CrimeListFragment extends Fragment {
                     Toast.makeText(getActivity(), "The police are being notified", Toast.LENGTH_SHORT).show();
                 }
             });
+        }
+
+        public void onClick(View view) {
+            Toast.makeText(getActivity(), mCrime.getTitle() + " clicked!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -74,7 +78,7 @@ public class CrimeListFragment extends Fragment {
 
         @NonNull
         @Override
-        public CrimeHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             return getItemViewType(i) == POLICE_WORTHY_CRIME ?  new CrimeHolderPolice(layoutInflater, viewGroup) : new GenericCrimeHolder(layoutInflater, viewGroup);
         }
