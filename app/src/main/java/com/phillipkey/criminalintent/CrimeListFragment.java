@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
 import java.util.List;
 
 public class CrimeListFragment extends Fragment {
@@ -20,6 +22,7 @@ public class CrimeListFragment extends Fragment {
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTitleTextView;
         private TextView mDateTextView;
+        private ImageView mSolvedImageView;
         private Crime mCrime;
 
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -27,13 +30,16 @@ public class CrimeListFragment extends Fragment {
 
             mTitleTextView = itemView.findViewById(R.id.crime_title);
             mDateTextView = itemView.findViewById(R.id.crime_date);
+            mSolvedImageView = itemView.findViewById(R.id.crime_solved);
             itemView.setOnClickListener(this);
         }
 
         public void bind(Crime crime) {
+            CharSequence formattedDate = android.text.format.DateFormat.format("EEEE, MMM d, yyyy",crime.getDate());
             mCrime = crime;
             mTitleTextView.setText(crime.getTitle());
-            mDateTextView.setText(crime.getDate().toString());
+            mDateTextView.setText(formattedDate.toString());
+            mSolvedImageView.setVisibility(crime.isSolved() ? View.VISIBLE : View.GONE);
         }
 
         public void onClick(View view) {
